@@ -1,5 +1,6 @@
 services:
     app:
+        image: "node:22"
         build:
             context: .
             dockerfile: Dockerfile
