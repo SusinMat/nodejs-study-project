@@ -12,6 +12,6 @@ server.on("request", (request, response) => {
     }
 });
 
-server.listen(4080, "127.0.0.1", () => {
+server.listen(4080, "0.0.0.0", () => {
     console.log("Server has started on:", server.address());
 });
