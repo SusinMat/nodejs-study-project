@@ -1,17 +1,16 @@
-const http = require("node:http");
+const express = require("express");
 
-const server = http.createServer();
+const app = express();
+const port = 4080;
 
-server.on("request", (request, response) => {
-    if (request.url === "/life-check") {
-        const responseBody = "I'm alive.";
-        response.statusCode = 200;
-        response.setHeader("Content-Type", "text.plain");
-        response.write(responseBody);
-        response.end();
-    }
+app.get("/health", (request, response) => {
+    const responseBody = "I'm alive.";
+    response.statusCode = 200;
+    response.setHeader("Content-Type", "text.plain");
+    response.write(responseBody);
+    response.end();
 });
 
-server.listen(4080, "0.0.0.0", () => {
-    console.log("Server has started on:", server.address());
+app.listen(port, () => {
+    console.log(`Server is listening on ${port}.`);
 });
