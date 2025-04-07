@@ -5,3 +5,4 @@ RUN yarn install
 COPY . /app
 CMD node src/app.js
 EXPOSE 4080
+EXPOSE 5432
