@@ -1,0 +1,1 @@
+Supplies data to the client.
