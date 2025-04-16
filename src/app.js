@@ -1,5 +1,5 @@
 import express from "express";
-import { setUp } from "./db/setup.js";
+import { db } from "./db/db.js";
 
 const app = express();
 const port = 4080;
@@ -16,4 +16,5 @@ app.listen(port, () => {
     console.log(`Server is listening on ${port}.`);
 });
 
-setUp();
+await db.connectClient();
+await db.helloWorld();
