@@ -4,7 +4,7 @@ import { db } from "./db/db.js";
 const app = express();
 const port = 4080;
 
-await db.connectClient();
+await db.connectPool();
 await db.helloWorld();
 
 app.get("/health", (request, response) => {

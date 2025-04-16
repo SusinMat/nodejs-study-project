@@ -1,9 +1,9 @@
 import pg from "pg";
-const { Client } = pg;
+const { Client, Pool } = pg;
 
 class DB {
     constructor() {
-        this.client = DB.newClient();
+        this.pool = DB.newPool();
     }
 
     static newClient() {
@@ -16,36 +16,61 @@ class DB {
         });
     }
 
-    async closeClient() {
-        await this.client.end();
+    static newPool() {
+        return new Pool({
+            user: "user",
+            password: "pass",
+            host: "nodejs-study-project-db-1",
+            port: 5432,
+            database: "db",
+        });
     }
 
-    getClient() {
-        return this.client;
-    }
-
-    async connectClient() {
-        await this.client.connect();
+    async connectPool() {
+        this.pool.connect();
     }
 
     async helloWorld() {
+        const client = DB.newClient();
         try {
-            const result = await this.client.query(
-                "SELECT $1::text as message",
-                ["Hello world!"]
-            );
+            await client.connect();
+            const result = await client.query("SELECT $1::text as message", [
+                "Hello world!",
+            ]);
             console.log(result.rows[0].message); // Hello world!
-        } catch (err) {
-            console.error(err);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            client.end();
         }
     }
 
     async createTables() {
-        await this.helloWorld();
+        try {
+            await this.pool.query(`
+                CREATE TABLE Department (
+	                name VARCHAR(255)
+                );
+            `);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     async dropTables() {
-        await this.helloWorld();
+        try {
+            await this.pool.query(`
+                DO $$ DECLARE
+                    r RECORD;
+                BEGIN
+                    FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = current_schema()) LOOP
+                    EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(r.tablename) || ' CASCADE';
+                    END LOOP;
+                END $$;
+            `);
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
 
