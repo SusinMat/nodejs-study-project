@@ -3,13 +3,21 @@ const { Client } = pg;
 
 class DB {
     constructor() {
-        this.client = new Client({
+        this.client = DB.newClient();
+    }
+
+    static newClient() {
+        return new Client({
             user: "user",
             password: "pass",
             host: "nodejs-study-project-db-1",
             port: 5432,
             database: "db",
         });
+    }
+
+    async closeClient() {
+        await this.client.end();
     }
 
     getClient() {
@@ -29,9 +37,15 @@ class DB {
             console.log(result.rows[0].message); // Hello world!
         } catch (err) {
             console.error(err);
-        } finally {
-            await this.client.end();
         }
+    }
+
+    async createTables() {
+        await this.helloWorld();
+    }
+
+    async dropTables() {
+        await this.helloWorld();
     }
 }
 

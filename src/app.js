@@ -4,6 +4,9 @@ import { db } from "./db/db.js";
 const app = express();
 const port = 4080;
 
+await db.connectClient();
+await db.helloWorld();
+
 app.get("/health", (request, response) => {
     const responseBody = "I'm alive.";
     response.statusCode = 200;
@@ -12,9 +15,18 @@ app.get("/health", (request, response) => {
     response.end();
 });
 
+app.post("/create-tables", (request, response) => {
+    db.createTables();
+    response.statusCode = 200;
+    response.end();
+});
+
+app.post("/drop-tables", (request, response) => {
+    db.dropTables();
+    response.statusCode = 200;
+    response.end();
+});
+
 app.listen(port, () => {
     console.log(`Server is listening on ${port}.`);
 });
-
-await db.connectClient();
-await db.helloWorld();
