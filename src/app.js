@@ -1,7 +1,6 @@
 import express from "express";
 import { db } from "./db/db.js";
-import { Routes } from "./routes/routes.js";
-import "./routes/add-routes.js";
+import { addRoutes } from "./routes/add-routes.js";
 
 const app = express();
 const port = 4080;
@@ -9,7 +8,7 @@ const port = 4080;
 await db.connectPool();
 await db.helloWorld();
 
-Routes.addRoutes(app);
+addRoutes(app);
 
 app.listen(port, () => {
     console.log(`Server is listening on ${port}.`);
