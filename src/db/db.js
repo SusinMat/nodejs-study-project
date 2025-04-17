@@ -35,7 +35,7 @@ class DB {
         try {
             await client.connect();
             const result = await client.query("SELECT $1::text as message", [
-                "Hello world!",
+                "Database is up.",
             ]);
             console.log(result.rows[0].message); // Hello world!
         } catch (error) {

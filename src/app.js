@@ -1,6 +1,7 @@
 import express from "express";
 import { db } from "./db/db.js";
 import { Routes } from "./routes/routes.js";
+import "./routes/add-routes.js";
 
 const app = express();
 const port = 4080;
