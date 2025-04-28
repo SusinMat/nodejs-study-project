@@ -12,6 +12,7 @@
         "node": ">=22.0"
     },
     "devDependencies": {
+        "@types/pg": "^8.11.14",
         "nodemon": "^3.1.9",
         "typescript": "^5.8.3"
     }
