@@ -1,5 +1,5 @@
 import { Routes } from "./routes.js";
-import { db } from "../db/db.js";
+import { db } from "../db/db.ts";
 
 Routes.addTableRoutes = (app) => {
     app.post("/tables/create", (request, response) => {

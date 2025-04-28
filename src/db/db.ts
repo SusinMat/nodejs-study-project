@@ -2,6 +2,8 @@ import pg from "pg";
 const { Client, Pool } = pg;
 
 class DB {
+    private pool;
+
     constructor() {
         this.pool = DB.newPool();
     }
