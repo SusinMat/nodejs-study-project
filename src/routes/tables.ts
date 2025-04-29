@@ -5,7 +5,7 @@ import { db } from "../db/db.ts";
 declare module "./routes.ts" {
     namespace Routes {
         export function addTableRoutes(app: Express): void;
-}
+    }
 }
 
 Routes.addTableRoutes = function (app: Express) {

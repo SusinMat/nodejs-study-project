@@ -3,6 +3,6 @@ WORKDIR /app
 COPY yarn.lock /app
 RUN yarn install
 COPY . /app
-CMD node src/app.js
+CMD yarn tsc
 EXPOSE 4080
 EXPOSE 5432
