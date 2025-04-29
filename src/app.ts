@@ -1,6 +1,6 @@
 import express from "express";
-import { db } from "./db/db.ts";
-import { addRoutes } from "./routes/add-routes.ts";
+import { db } from "./db/db.js";
+import { addRoutes } from "./routes/add-routes.js";
 
 const app = express();
 const port = 4080;
