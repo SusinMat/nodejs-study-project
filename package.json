@@ -4,7 +4,10 @@
     "version": "0.1",
     "description": "A study project designed the learn how to work with NodeJS, Docker, and Postgres.",
     "main": "./src/app.js",
-    "dependencies": {},
+    "dependencies": {
+        "express": "^5.1.0",
+        "pg": "^8.15.6"
+    },
     "engines": {
         "node": ">=22.0"
     },
