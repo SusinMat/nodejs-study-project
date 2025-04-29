@@ -1,8 +1,8 @@
-export class Routes {
-    constructor() {}
+import { Express, Request, Response } from "express";
 
-    static addHealth(app) {
-        app.get("/health", (request, response) => {
+export namespace Routes {
+    export function addHealth(app: Express) {
+        app.get("/health", (request: Request, response: Response) => {
             const responseBody = "I'm alive.";
             response.statusCode = 200;
             response.setHeader("Content-Type", "text.plain");
